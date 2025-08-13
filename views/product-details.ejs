@@ -1,0 +1,51 @@
+<%- include('partials/header', { title, categories, q, category, seller }) %>
+<div class="container product-layout">
+  <section class="gallery">
+    <img src="<%= product.image %>" alt="product">
+  </section>
+
+  <section class="product-info">
+    <div class="stock">● <%= product.stock > 0 ? 'In stock (' + product.stock + ' available)' : 'Out of stock' %></div>
+    <h2><%= product.name %></h2>
+    <div class="muted">Category: <%= product.category || 'Uncategorized' %></div>
+    <div class="price mt-20">$<%= product.price.toFixed(2) %></div>
+
+    <div class="mt-20"><a class="btn primary">Add to cart</a> <a class="btn">Save for later</a></div>
+
+    <div class="mt-20 grid cols-2">
+      <div class="tile"><div class="muted">Stock</div><%= product.stock || 0 %> units</div>
+      <div class="tile"><div class="muted">Category</div><%= product.category || 'Uncategorized' %></div>
+      <div class="tile"><div class="muted">Seller</div><%= product.seller ? product.seller.name : 'Unknown' %></div>
+      <div class="tile"><div class="muted">Added</div><%= new Date(product.createdAt).toLocaleDateString() %></div>
+    </div>
+  </section>
+
+  <aside class="seller" style="position: relative;">
+    <div class="badge ok">Verified Seller</div>
+    <h4><%= product.seller ? product.seller.name : 'Unknown Seller' %></h4>
+    <div class="muted"><%= product.seller ? product.seller.email : 'No contact information' %></div>
+    <div class="muted">Stock: <%= product.stock || 0 %> available</div>
+    <div class="seller-actions" >
+      <div class="mt-20"><a class="btn primary" style="width:100%">Send inquiry</a></div>
+      <div class="mt-20"><a class="btn" style="width:100%">Seller's Profile</a></div>
+    </div>
+  </aside>
+</div>
+
+<div class="container">
+  <div class="tabs mt-20">
+    <a class="active" href="#">Description</a>
+    <a>Reviews</a>
+    <a>Shipping</a>
+    <a>About seller</a>
+  </div>
+  <p class="muted"><%= product.description %></p>
+
+  <h3 class="mt-20">Related products</h3>
+  <section class="grid cols-6">
+    <% related.forEach(r => { %>
+      <div class="tile"><a href="/products/<%= r._id %>"><img src="<%= r.image %>"><div class="muted">$<%= r.price.toFixed(2) %></div></a></div>
+    <% }) %>
+  </section>
+</div>
+<%- include('partials/footer') %>

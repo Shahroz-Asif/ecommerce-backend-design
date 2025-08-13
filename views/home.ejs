@@ -1,0 +1,45 @@
+<%- include('partials/header', { title, categories, q, category, seller }) %>
+<div class="container">
+  <section class="hero">
+    <aside class="card catlist">
+      <strong>Categories</strong>
+      <% categories.forEach(c => { %>
+        <a href="/products?category=<%= encodeURIComponent(c) %>"><%= c %></a>
+      <% }) %>
+    </aside>
+
+    <section class="card banner">
+      <div>
+        <h2>Latest trending<br>Electronic items</h2>
+        <p class="muted">Discover great deals today</p>
+        <a class="cta" href="/products">Learn more</a>
+      </div>
+    </section>
+
+    <aside class="card side-calls">
+      <% if (seller) { %>
+        <div class="muted">Welcome, <%= seller.name %></div>
+        <a class="btn join" href="/auth/logout">Logout</a>
+      <% } else { %>
+        <div class="muted">Hi, user — let's get started</div>
+        <a class="btn join" href="/auth/signup">Join now</a>
+        <a class="btn coupon" href="#">Get $10 off</a>
+        <a class="btn quote" href="/products">Send quotes</a>
+      <% } %>
+    </aside>
+  </section>
+
+  <h3 class="mt-20">Featured Products</h3>
+  <section class="grid cols-6 mt-20">
+    <% featured.forEach(p => { %>
+      <div class="tile">
+        <a href="/products/<%= p._id %>">
+          <img src="<%= p.image %>">
+          <div class="price">$<%= p.price.toFixed(2) %></div>
+          <div class="muted"><%= p.name %></div>
+        </a>
+      </div>
+    <% }) %>
+  </section>
+</div>
+<%- include('partials/footer') %>
