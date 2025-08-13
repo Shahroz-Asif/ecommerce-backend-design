@@ -19,10 +19,10 @@
     <aside class="card side-calls">
       <% if (seller) { %>
         <div class="muted">Welcome, <%= seller.name %></div>
-        <a class="btn join" href="/auth/logout">Logout</a>
+        <a class="btn join" href="/sellers/logout">Logout</a>
       <% } else { %>
         <div class="muted">Hi, user — let's get started</div>
-        <a class="btn join" href="/auth/signup">Join now</a>
+        <a class="btn join" href="/sellers/signup">Join now</a>
         <a class="btn coupon" href="#">Get $10 off</a>
         <a class="btn quote" href="/products">Send quotes</a>
       <% } %>
